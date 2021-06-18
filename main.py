@@ -8,6 +8,7 @@ from datetime import datetime
 db_url = os.getenv("DATABASE_URL", "sqlite:///db.sqlite").replace("postgres://", "postgresql://", 1)
 db = SQLAlchemy(db_url)
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
@@ -20,11 +21,27 @@ class User(db.Model):
     created = db.Column(db.DateTime, default=datetime.now())
     updated = db.Column(db.DateTime, onupdate=datetime.now())
 
+
+class Topic(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, unique=True)
+    description = db.Column(db.String, unique=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created = db.Column(db.DateTime, default=datetime.now())
+    updated = db.Column(db.DateTime, onupdate=datetime.now())
+
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String, unique=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created = db.Column(db.DateTime, default=datetime.now())
+    updated = db.Column(db.DateTime, onupdate=datetime.now())
+
 app = Flask(__name__)
 
 db.create_all()
-
-
 
 
 @app.route("/")
@@ -62,7 +79,6 @@ def dashboard():
     return render_template("error.html")
 
 
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
@@ -87,7 +103,6 @@ def login():
         else:
             return render_template("error-login.html")
     return redirect(url_for("dashboard"))
-
 
 
 @app.route("/logout")
@@ -133,16 +148,27 @@ def registration():
     return redirect(url_for("home"))
 
 
-@app.route("/dashboard/topic")
+@app.route("/dashboard/topic", methods=["GET", "POST"])
 def topic():
     session_cookie = request.cookies.get("session")
 
-    if session_cookie:
+    if request.method == "GET":
+        return render_template("topic.html")
+
+    elif request.method == "POST":
+        title = request.form.get("title")
+        description = request.form.get("description")
+
         user = db.query(User).filter_by(session_token=session_cookie).first()
-        if user:
-            return render_template("topic.html", user=user)
-    else:
-        return render_template("error.html")
+
+        if not user:
+            return redirect(url_for('login'))
+
+        topic = db.query(Topic).all()
+
+        topic_user = topic.user.username
+
+        return redirect(url_for('dashboard'))
 
 
 if __name__ == '__main__':

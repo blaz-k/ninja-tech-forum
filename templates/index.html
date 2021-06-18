@@ -15,10 +15,15 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+      {% if user %}
+      <h1>Welcome to Ninja Tech Blog</h1>
+      <h2>You can start a topic, or just post some comments</h2>
+      {% else %}
       <h1>Welcome to Ninja Tech Blog</h1>
       <h2>You can start a topic, or just post some comments</h2>
       <a href="/registration" class="btn-get-started">New here?</a>
       <a href="/login" class="btn-get-started">Log in</a>
+      {% endif %}
     </div>
   </section><!-- End Hero Section -->
 

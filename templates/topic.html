@@ -1,0 +1,15 @@
+{% extends "user-base.html" %}
+
+
+
+{% block content %}
+
+<h1>Create a new topic</h1>
+
+<form method="post">
+    <input type="text" name="title" placeholder="Topic title" required> <br>
+    <textarea name="description" rows="5" required></textarea> <br>
+    <button>Submit</button>
+</form>
+
+{% endblock content %}
