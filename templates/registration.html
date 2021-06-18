@@ -3,6 +3,11 @@
 
 {% block title %}Registration{% endblock title %}
 
+{% block link %}
+    <link href="/static/css/registration.css" rel="stylesheet">
+{% endblock link %}
+
+
 
 {% block content %}
 <br>
@@ -11,7 +16,7 @@
 <br>
 <br>
 <form action="/registration" method="post" >
-    <main>
+    <main class="container registration">
         <h2>Registration</h2>
         <div class="form-floating mb-3" >
           <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="Username">
@@ -24,14 +29,6 @@
         <div class="form-floating mb-3">
           <input type="text" name="last-name" class="form-control" id="floatingLastname" placeholder="Last name">
           <label for="floatingLastname">Last name</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="text" name="country" class="form-control" id="floatingCountry" placeholder="Country">
-          <label for="floatingCountry">Country</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="number" name="postal-code" class="form-control" id="floatingPostal" placeholder="Postal code">
-          <label for="floatingPostal">Postal code</label>
         </div>
         <div class="form-floating mb-3">
           <input type="email" name="user-email" class="form-control" id="floatingEmail" placeholder="Email">

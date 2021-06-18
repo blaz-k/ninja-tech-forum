@@ -1,0 +1,19 @@
+body{
+    background: #040404 url("../img/db5.jpg") center no-repeat;
+    background-size: cover;
+    height: 100%;
+
+}
+
+.registration {
+  width: 100%;
+  max-width: 330px;
+  padding: 10px;
+  margin: auto;
+}
+
+h2{
+    text-align: center;
+}
+
+

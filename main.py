@@ -13,8 +13,6 @@ class User(db.Model):
     username = db.Column(db.String, unique=True)
     first_name = db.Column(db.String, unique=False)
     last_name = db.Column(db.String, unique=False)
-    country = db.Column(db.String, unique=False)
-    postal_code = db.Column(db.Integer, unique=False)
     email = db.Column(db.String, unique=True)
     phone_number = db.Column(db.Integer, unique=True)
     password = db.Column(db.String, unique=False)
@@ -54,8 +52,6 @@ def registration():
         username = request.form.get("username")
         first_name = request.form.get("first-name")
         last_name = request.form.get("last-name")
-        country = request.form.get("country")
-        postal_code = request.form.get("postal-code")
         email = request.form.get("user-email")
         phone_number = request.form.get("telephone")
         password = request.form.get("password")
@@ -69,14 +65,14 @@ def registration():
             if password == repeat:
                 password_hash = sha256(password.encode("utf-8")).hexdigest()
                 new_user = User(username=username, first_name=first_name, last_name=last_name,
-                                country=country, postal_code=postal_code, email=email,
+                                email=email,
                                 phone_number=phone_number, password=password_hash)
                 new_user.save()
 
                 return render_template("successful.html")
             else:
                 return "ERROR: This username already exist! You need to choose something else."
- 
+
     return redirect(url_for("home"))
 
 
