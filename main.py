@@ -27,8 +27,17 @@ class Topic(db.Model):
     title = db.Column(db.String, unique=True)
     description = db.Column(db.String, unique=False)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    author = db.relationship("User")
     created = db.Column(db.DateTime, default=datetime.now())
     updated = db.Column(db.DateTime, onupdate=datetime.now())
+
+    @classmethod
+    def create(cls, title, description, author):
+        topic = cls(title=title, description=description, author=author)
+        db.add(topic)
+        db.commit()
+
+        return topic
 
 
 
@@ -44,15 +53,21 @@ app = Flask(__name__)
 db.create_all()
 
 
+@app.route("/blog")
+def blog():
+    return render_template("blog.html")
+
+
 @app.route("/")
 def home():
+    topics =db.query(Topic).all()
     session_cookie = request.cookies.get("session")
 
     if session_cookie:
         user = db.query(User).filter_by(session_token=session_cookie).first()
         if user:
-            return render_template("index.html", user=user)
-    return render_template("index.html")
+            return render_template("index.html", user=user, topics=topics)
+    return render_template("index.html", topics=topics)
 
 
 @app.route("/contact")
@@ -150,7 +165,6 @@ def registration():
 
 @app.route("/dashboard/topic", methods=["GET", "POST"])
 def topic():
-    session_cookie = request.cookies.get("session")
 
     if request.method == "GET":
         return render_template("topic.html")
@@ -159,14 +173,13 @@ def topic():
         title = request.form.get("title")
         description = request.form.get("description")
 
-        user = db.query(User).filter_by(session_token=session_cookie).first()
+        session_token = request.cookies.get("session")
+        user = db.query(User).filter_by(session_token=session_token).first()
 
         if not user:
             return redirect(url_for('login'))
 
-        topic = db.query(Topic).all()
-
-        topic_user = topic.user.username
+        topic = Topic.create(title=title, description=description, author=user)
 
         return redirect(url_for('dashboard'))
 

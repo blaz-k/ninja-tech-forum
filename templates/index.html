@@ -27,6 +27,13 @@
     </div>
   </section><!-- End Hero Section -->
 
+<div>
+
+  {% for topic in topics %}
+Post by: {{topic.author.username}}, content: {{topic.description}}
+ {% endfor %}
+</div>
+
 {% endblock content %}
 
 
