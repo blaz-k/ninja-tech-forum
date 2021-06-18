@@ -3,3 +3,19 @@
 
 {% block title %}Login{% endblock title %}
 
+{% block content %}
+<form action="/login" method="post">
+  <section id="hero" >
+    <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+      <h1>Please login</h1>
+      <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
+      <label for="floatingInput">Username</label>
+      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="password">
+      <label for="floatingPassword">Password</label>
+      <a href="/login" class="btn-get-started">Log in</a>
+    </div>
+  </section><!-- End Hero Section -->
+</form>
+{% endblock content %}
+
+

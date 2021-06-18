@@ -3,3 +3,125 @@
 
 {% block title %}Registration{% endblock title %}
 
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<form action="/registration" method="post" >
+    <main>
+        <h2>Registration</h2>
+        <div class="form-floating mb-3" >
+          <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="Username">
+          <label for="floatingUsername">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" name="first-name" class="form-control" id="floatingFirstname" placeholder="Firstname">
+          <label for="floatingFirstname">First name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" name="last-name" class="form-control" id="floatingLastname" placeholder="Last name">
+          <label for="floatingLastname">Last name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" name="country" class="form-control" id="floatingCountry" placeholder="Country">
+          <label for="floatingCountry">Country</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="number" name="postal-code" class="form-control" id="floatingPostal" placeholder="Postal code">
+          <label for="floatingPostal">Postal code</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="email" name="user-email" class="form-control" id="floatingEmail" placeholder="Email">
+          <label for="floatingEmail">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="tel" name="telephone" class="form-control" id="floatingTelephone" placeholder="Telephone number">
+          <label for="floatingTelephone">Telephone number</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" name="repeat" class="form-control" id="floatingRepeat" placeholder="Password">
+          <label for="floatingRepeat">Repeat password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+    </main>
+</form>
+
+
+
+  <!--<main id="main">
+    <section id="team">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h3 class="section-title">Team</h3>
+          <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="member" data-aos="fade-up" data-aos-delay="100">
+              <div class="pic"><img src="/static/img/team-1.jpg" alt=""></div>
+              <h4>Walter White</h4>
+              <span>Chief Executive Officer</span>
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="member" data-aos="fade-up" data-aos-delay="200">
+              <div class="pic"><img src="/static/img/team-2.jpg" alt=""></div>
+              <h4>Sarah Jhinson</h4>
+              <span>Product Manager</span>
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="member" data-aos="fade-up" data-aos-delay="300">
+              <div class="pic"><img src="/static/img/team-3.jpg" alt=""></div>
+              <h4>William Anderson</h4>
+              <span>CTO</span>
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="member" data-aos="fade-up" data-aos-delay="400">
+              <div class="pic"><img src="/static/img/team-4.jpg" alt=""></div>
+              <h4>Amanda Jepson</h4>
+              <span>Accountant</span>
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main> -->
+
+{% endblock content %}
