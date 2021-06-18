@@ -1,4 +1,8 @@
+{% if user %}
+{% extends "user-base.html" %}
+{% else %}
 {% extends "base.html" %}
+{% endif %}
 
 
 {% block title %}Registration{% endblock title %}
@@ -7,6 +11,7 @@
     <link href="/static/css/registration.css" rel="stylesheet">
 {% endblock link %}
 
+{% block registrationactive %}active{% endblock registrationactive %}
 
 
 {% block content %}

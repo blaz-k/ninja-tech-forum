@@ -3,17 +3,28 @@
 
 {% block title %}Login{% endblock title %}
 
+{% block link %}
+    <link href="/static/css/registration.css" rel="stylesheet">
+{% endblock link %}
+
+{% block loginactive %}active{% endblock loginactive %}
+
 {% block content %}
 <form action="/login" method="post">
   <section id="hero" >
-    <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
-      <h1>Please login</h1>
-      <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
-      <label for="floatingInput">Username</label>
-      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="password">
-      <label for="floatingPassword">Password</label>
-      <a href="/login" class="btn-get-started">Log in</a>
+    <div class="hero-container form-floating login" data-aos="zoom-in" data-aos-delay="100">
+        <h1 class="h3 mb-3 fw-normal">Please login</h1>
+        <div class="form-floating mt-4">
+          <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating mt-2">
+          <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Login</button>
     </div>
+
   </section><!-- End Hero Section -->
 </form>
 {% endblock content %}

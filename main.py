@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, make_response
 from sqla_wrapper import SQLAlchemy
 from hashlib import sha256
 import uuid
@@ -29,6 +29,12 @@ db.create_all()
 
 @app.route("/")
 def home():
+    session_cookie = request.cookies.get("session")
+
+    if session_cookie:
+        user = db.query(User).filter_by(session_token=session_cookie).first()
+        if user:
+            return render_template("index.html", user=user)
     return render_template("index.html")
 
 
@@ -41,6 +47,57 @@ def contact():
         if user:
             return render_template("contact.html", user=user)
     return render_template("contact.html")
+
+
+@app.route("/dashboard", methods=["GET", "POST"])
+def dashboard():
+
+    session_cookie = request.cookies.get("session")
+
+    if session_cookie:
+        user = db.query(User).filter_by(session_token=session_cookie).first()
+        if user:
+            return render_template("dashboard.html", user=user)
+
+    return render_template("error.html")
+
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+
+    elif request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        password_hash = sha256(password.encode("utf-8")).hexdigest()
+
+        existing_user = db.query(User).filter_by(username=username, password=password_hash).first()
+
+        if existing_user:
+            session_token = str(uuid.uuid4())
+            existing_user.session_token = session_token
+            existing_user.save()
+
+            response = make_response(redirect(url_for("dashboard")))
+            response.set_cookie("session", session_token)
+            return response
+        else:
+            return render_template("error-login.html")
+    return redirect(url_for("dashboard"))
+
+
+
+@app.route("/logout")
+def logout():
+    session_cookie = request.cookies.get("session")
+    user = db.query(User).filter_by(session_token=session_cookie).first()
+    user.session_token = ""
+    user.save()
+
+    return redirect(url_for("login"))
 
 
 @app.route("/registration", methods=["GET", "POST"])
@@ -76,14 +133,16 @@ def registration():
     return redirect(url_for("home"))
 
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
+@app.route("/dashboard/topic")
+def topic():
+    session_cookie = request.cookies.get("session")
 
-
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
+    if session_cookie:
+        user = db.query(User).filter_by(session_token=session_cookie).first()
+        if user:
+            return render_template("topic.html", user=user)
+    else:
+        return render_template("error.html")
 
 
 if __name__ == '__main__':
