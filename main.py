@@ -1,52 +1,12 @@
-import os
 from flask import Flask, render_template, request, redirect, url_for, make_response
-from sqla_wrapper import SQLAlchemy
 from hashlib import sha256
 import uuid
-from datetime import datetime
 
-db_url = os.getenv("DATABASE_URL", "sqlite:///db.sqlite").replace("postgres://", "postgresql://", 1)
-db = SQLAlchemy(db_url)
+from models.topic import Topic
+from models.user import User
+from models.comment import Comment
+from models.settings import db
 
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True)
-    first_name = db.Column(db.String, unique=False)
-    last_name = db.Column(db.String, unique=False)
-    email = db.Column(db.String, unique=True)
-    phone_number = db.Column(db.Integer, unique=True)
-    password = db.Column(db.String, unique=False)
-    session_token = db.Column(db.String, unique=False)
-    created = db.Column(db.DateTime, default=datetime.now())
-    updated = db.Column(db.DateTime, onupdate=datetime.now())
-
-
-class Topic(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, unique=True)
-    description = db.Column(db.String, unique=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    author = db.relationship("User")
-    created = db.Column(db.DateTime, default=datetime.now())
-    updated = db.Column(db.DateTime, onupdate=datetime.now())
-
-    @classmethod
-    def create(cls, title, description, author):
-        topic = cls(title=title, description=description, author=author)
-        db.add(topic)
-        db.commit()
-
-        return topic
-
-
-
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String, unique=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    created = db.Column(db.DateTime, default=datetime.now())
-    updated = db.Column(db.DateTime, onupdate=datetime.now())
 
 app = Flask(__name__)
 
@@ -55,7 +15,9 @@ db.create_all()
 
 @app.route("/blog")
 def blog():
-    return render_template("blog.html")
+    topics = db.query(Topic).all()
+
+    return render_template("blog.html", topics=topics)
 
 
 @app.route("/")
