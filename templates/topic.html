@@ -4,7 +4,6 @@
 {% extends "base.html" %}
 {% endif %}
 
-
 {% block content %}
 <br>
 <br>
@@ -13,20 +12,21 @@
 <br>
 <br>
 <form action="/topic/{{topic.id}}" method="post" >
-    <p>
-        Title: {{topic.title}}
-    </p>
-        <p>
-        Post by: {{topic.author.username}}
-    </p>
+    <div class=" container mt-4 mb-2 ">
+        <div class="">
+          <h2 class="pb-4 mb-4 fst-italic border-bottom text-center">
+            Topics(tematika za urediti)
+          </h2>
+          <article class="blog-post">
+            <h1 class="blog-post-title"> Title: {{topic.title}}</h1>
+              <p class="blog-post-meta">{{topic.created.strftime("%B")}} {{topic.created.day}}, {{topic.created.year}} by <strong>{{topic.author.username}}</strong></p>
 
-        <p>
-        content: {{topic.description}}
-    </p>
+            <p>{{topic.description}}</p>
+            <hr>
+          </article>
+        </div>
+    </div>
 
-        <p>
-        Title: {{topic.title}}
-    </p>
 
 </form>
 
