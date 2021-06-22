@@ -1,0 +1,10 @@
+.topic {
+  width: 100%;
+  max-width: 530px;
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}

@@ -2,8 +2,19 @@
 
 
 
-{% block content %}
+{% block link %}
+    <link href="/static/css/create-topic.css" rel="stylesheet">
+{% endblock link %}
 
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<main class="topic">
 <h1>Create a new topic</h1>
 
 <form method="post">
@@ -11,5 +22,7 @@
     <textarea name="description" rows="5" required></textarea> <br>
     <button>Submit</button>
 </form>
+
+</main>
 
 {% endblock content %}

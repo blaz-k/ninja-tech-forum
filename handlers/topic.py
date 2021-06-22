@@ -6,6 +6,18 @@ from models.comment import Comment
 from models.settings import db
 
 
+def topics():
+    if request.method == "GET":
+        topics = db.query(Topic).all()
+        session_cookie = request.cookies.get("session")
+
+        if session_cookie:
+            user = db.query(User).filter_by(session_token=session_cookie).first()
+            if user:
+                return render_template("topics.html", topics=topics, user=user)
+
+
+
 def topic_create():
 
     if request.method == "GET":

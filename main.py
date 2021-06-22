@@ -31,19 +31,17 @@ app.add_url_rule(rule="/registration", endpoint="auth.registration", view_func=a
 
 # TOPIC
 app.add_url_rule(rule="/dashboard/topic-create", endpoint="topic.topic_create", view_func=topic.topic_create, methods=["GET", "POST"])
+app.add_url_rule(rule="/topics", endpoint="topic.topics", view_func=topic.topics, methods=["GET"])
 
 
 # USER
 
 
-
-@app.route("/blog")
-def blog():
+@app.route("/topic/<topic_id>")
+def topic_details(topic_id):
     topics = db.query(Topic).all()
 
-    return render_template("blog.html", topics=topics)
-
-
+    return render_template("", topics=topics)
 
 
 @app.route("/dashboard", methods=["GET", "POST"])
@@ -57,7 +55,6 @@ def dashboard():
             return render_template("dashboard.html", user=user)
 
     return render_template("error.html")
-
 
 
 if __name__ == '__main__':
