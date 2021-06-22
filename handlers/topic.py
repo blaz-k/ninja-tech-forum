@@ -15,7 +15,7 @@ def topics():
             user = db.query(User).filter_by(session_token=session_cookie).first()
             if user:
                 return render_template("topics.html", topics=topics, user=user)
-
+        return render_template("topics.html", topics=topics)
 
 
 def topic_create():
@@ -36,4 +36,22 @@ def topic_create():
         topic = Topic.create(title=title, description=description, author=user)
 
         return redirect(url_for('dashboard'))
+
+
+def topic_details(topic_id):
+    topic = db.query(Topic).get(int(topic_id))
+    session_cookie = request.cookies.get("session")
+    user = None
+    if session_cookie:
+        user = db.query(User).filter_by(session_token=session_cookie).first()
+    topics =db.query(Topic).all()
+
+    if request.method == "GET":
+        if not topic:
+            return render_template("not-found.html", user=user)
+
+        return render_template("topic.html", topic=topic, topics=topics, user=user)
+
+    return render_template("topic.html", topics=topics, )
+
 
