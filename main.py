@@ -10,6 +10,7 @@ from models.settings import db
 from handlers import public
 from handlers import auth
 from handlers import topic
+from handlers import user
 
 
 app = Flask(__name__)
@@ -22,8 +23,7 @@ app.add_url_rule(rule="/", endpoint="public.home", view_func=public.home, method
 app.add_url_rule(rule="/contact", endpoint="public.contact", view_func=public.contact, methods=["GET"])
 
 
-
-# AUTHENTIFICATION
+# AUTHENTICATION
 app.add_url_rule(rule="/login", endpoint="auth.login", view_func=auth.login, methods=["GET", "POST"])
 app.add_url_rule(rule="/logout", endpoint="auth.logout", view_func=auth.logout, methods=["GET"])
 app.add_url_rule(rule="/registration", endpoint="auth.registration", view_func=auth.registration, methods=["GET", "POST"])
@@ -36,43 +36,9 @@ app.add_url_rule(rule="/topic/<topic_id>", endpoint="topic.topic_details", view_
 
 
 # USER
+app.add_url_rule(rule="/dashboard/edit-profile", endpoint="user.edit_profile", view_func=user.edit_profile, methods=["GET", "POST"])
 
 
-@app.route("/dashboard/edit-profile", methods=["GET", "POST"])
-def edit_profile():
-    session_cookie = request.cookies.get("session")
-
-    if session_cookie:
-        user = db.query(User).filter_by(session_token=session_cookie).first()
-
-        if not user:
-            return render_template("error.html")
-
-    else:
-        return render_template("error.html")
-
-    if request.method == "GET":
-        return render_template("edit-profile.html", user=user)
-
-    if request.method == "POST":
-        username = request.form.get("username")
-        first_name = request.form.get("first-name")
-        last_name = request.form.get("last-name")
-        email = request.form.get("user-email")
-        telephone = request.form.get("telephone")
-        password = request.form.get("password")
-        repeat = request.form.get("repeat")
-
-        user.username = username
-        user.first_name = first_name
-        user.last_name = last_name
-        user.email = email
-        user.telephone = telephone
-        user.password = sha256(password.encode("utf-8")).hexdigest()
-        user.repeat = repeat
-        user.save()
-
-        return redirect(url_for("dashboard"))
 
 
 @app.route("/dashboard", methods=["GET", "POST"])
