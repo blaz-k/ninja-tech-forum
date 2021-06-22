@@ -16,7 +16,6 @@ class Topic(db.Model):
     @classmethod
     def create(cls, title, description, author):
         topic = cls(title=title, description=description, author=author)
-        db.add(topic)
-        db.commit()
+        topic.save()
 
         return topic
