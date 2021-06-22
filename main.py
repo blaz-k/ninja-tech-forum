@@ -32,12 +32,10 @@ app.add_url_rule(rule="/registration", endpoint="auth.registration", view_func=a
 # TOPIC
 app.add_url_rule(rule="/dashboard/topic-create", endpoint="topic.topic_create", view_func=topic.topic_create, methods=["GET", "POST"])
 app.add_url_rule(rule="/topics", endpoint="topic.topics", view_func=topic.topics, methods=["GET"])
-app.add_url_rule(rule="/topics/<topic_id>", endpoint="topic.topic_details", view_func=topic.topic_details, methods=["GET", "POST"])
+app.add_url_rule(rule="/topic/<topic_id>", endpoint="topic.topic_details", view_func=topic.topic_details, methods=["GET", "POST"])
 
 
 # USER
-
-
 
 
 @app.route("/dashboard", methods=["GET", "POST"])

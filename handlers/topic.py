@@ -52,6 +52,6 @@ def topic_details(topic_id):
 
         return render_template("topic.html", topic=topic, topics=topics, user=user)
 
-    return render_template("topic.html", topics=topics, )
+    return render_template("topic.html", topic=topic, topics=topics)
 
 

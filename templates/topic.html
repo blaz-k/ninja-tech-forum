@@ -6,4 +6,28 @@
 
 
 {% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<form action="/topic/{{topic.id}}" method="post" >
+    <p>
+        Title: {{topic.title}}
+    </p>
+        <p>
+        Post by: {{topic.author.username}}
+    </p>
+
+        <p>
+        content: {{topic.description}}
+    </p>
+
+        <p>
+        Title: {{topic.title}}
+    </p>
+
+</form>
+
 {% endblock content %}
