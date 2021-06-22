@@ -39,8 +39,6 @@ app.add_url_rule(rule="/topic/<topic_id>", endpoint="topic.topic_details", view_
 app.add_url_rule(rule="/dashboard/edit-profile", endpoint="user.edit_profile", view_func=user.edit_profile, methods=["GET", "POST"])
 
 
-
-
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
 
