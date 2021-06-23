@@ -16,43 +16,44 @@
 
 
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-<br>
-
-    <form action="/dashboard/edit-profile" method="post">
-      <main class="form-registration text-center mt-2" >
-          <div class="row d-flex align-items-stretch ">
-              <div class="col-6 mt-4">
-                  <div class="form-floating mb-3" >
-                    <p>Username:</p> <input type="text" name="username" class="form-control" value="{{user.username}}" placeholder="Username">
-                  </div>
-                  <div class="form-floating mb-3">
-                      <p>First name:</p> <input type="text" name="first-name" class="form-control" value="{{user.first_name}}" placeholder="Firstname">
-                  </div>
-                  <div class="form-floating mb-3">
-                      <p>Last name:</p> <input type="text" name="last-name" class="form-control" value="{{user.last_name}}" placeholder="Last name">
-                  </div>
-                  <div class="form-floating mb-3">
-                    <p>Email: </p><input type="email" name="user-email" class="form-control" value="{{user.email}}" placeholder="Email">
-                  </div>
-              </div>
+<main id="main">
+  <section id="contact">
+    <div class="container mt-5">
+        <form action="/dashboard/edit-profile" method="post">
+          <main class="form-registration text-center mt-2" >
+              <div class="row d-flex align-items-stretch ">
                   <div class="col-6 mt-4">
-                      <div class="form-floating mb-3">
-                        <p>Telephone:</p> <input type="tel" name="telephone" class="form-control" value="{{user.phone_number}}" placeholder="Telephone number">
+                      <div class="form-floating mb-3" >
+                        <p>Username:</p> <input type="text" name="username" class="form-control" value="{{user.username}}" placeholder="Username">
                       </div>
                       <div class="form-floating mb-3">
-                        <p>Password:</p> <input type="password" name="password" class="form-control" placeholder="Password">
+                          <p>First name:</p> <input type="text" name="first-name" class="form-control" value="{{user.first_name}}" placeholder="Firstname">
                       </div>
                       <div class="form-floating mb-3">
-                        <p>Repeat: </p><input type="password" name="repeat" class="form-control" placeholder="Password">
+                          <p>Last name:</p> <input type="text" name="last-name" class="form-control" value="{{user.last_name}}" placeholder="Last name">
+                      </div>
+                      <div class="form-floating mb-3">
+                        <p>Email: </p><input type="email" name="user-email" class="form-control" value="{{user.email}}" placeholder="Email">
                       </div>
                   </div>
-          </div>
+                      <div class="col-6 mt-4">
+                          <div class="form-floating mb-3">
+                            <p>Telephone:</p> <input type="tel" name="telephone" class="form-control" value="{{user.phone_number}}" placeholder="Telephone number">
+                          </div>
+                          <div class="form-floating mb-3">
+                            <p>Password:</p> <input type="password" name="password" class="form-control" placeholder="Password">
+                          </div>
+                          <div class="form-floating mb-3">
+                            <p>Repeat: </p><input type="password" name="repeat" class="form-control" placeholder="Password">
+                          </div>
+                      </div>
+              </div>
 
-          <button class="alert alert-dark mt-4" type="submit">Submit</button>
-      </main>
-    </form>
+              <button class="alert alert-dark mt-4" type="submit">Submit</button>
+          </main>
+        </form>
+    </div>
+  </section>
+</main>
+
 {% endblock content %}

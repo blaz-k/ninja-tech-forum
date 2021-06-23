@@ -15,45 +15,46 @@
 
 
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<form action="/registration" method="post" >
-    <main class="container registration">
-        <h2>Registration</h2>
-        <div class="form-floating mb-3" >
-          <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="Username">
-          <label for="floatingUsername">Username</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="text" name="first-name" class="form-control" id="floatingFirstname" placeholder="Firstname">
-          <label for="floatingFirstname">First name</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="text" name="last-name" class="form-control" id="floatingLastname" placeholder="Last name">
-          <label for="floatingLastname">Last name</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="email" name="user-email" class="form-control" id="floatingEmail" placeholder="Email">
-          <label for="floatingEmail">Email</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="tel" name="telephone" class="form-control" id="floatingTelephone" placeholder="Telephone number">
-          <label for="floatingTelephone">Telephone number</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="password" name="repeat" class="form-control" id="floatingRepeat" placeholder="Password">
-          <label for="floatingRepeat">Repeat password</label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
-    </main>
-</form>
+  <main id="main">
+    <section id="contact">
+      <div class="container mt-5">
+        <form action="/registration" method="post" >
+            <main class="container registration">
+                <h2>Registration</h2>
+                <div class="form-floating mb-3" >
+                  <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="Username">
+                  <label for="floatingUsername">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" name="first-name" class="form-control" id="floatingFirstname" placeholder="Firstname">
+                  <label for="floatingFirstname">First name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" name="last-name" class="form-control" id="floatingLastname" placeholder="Last name">
+                  <label for="floatingLastname">Last name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="email" name="user-email" class="form-control" id="floatingEmail" placeholder="Email">
+                  <label for="floatingEmail">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="tel" name="telephone" class="form-control" id="floatingTelephone" placeholder="Telephone number">
+                  <label for="floatingTelephone">Telephone number</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                  <label for="floatingPassword">Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" name="repeat" class="form-control" id="floatingRepeat" placeholder="Password">
+                  <label for="floatingRepeat">Repeat password</label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+            </main>
+        </form>
+      </div>
+    </section>
+  </main>
 
 
 
