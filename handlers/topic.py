@@ -35,7 +35,7 @@ def topic_create():
 
         topic = Topic.create(title=title, description=description, author=user)
 
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('dashboard.dashboard'))
 
 
 def topic_details(topic_id):
