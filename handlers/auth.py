@@ -71,4 +71,4 @@ def registration():
             else:
                 return "ERROR: This username already exist! You need to choose something else."
 
-    return redirect(url_for("home"))
+    return redirect(url_for("public.home"))
