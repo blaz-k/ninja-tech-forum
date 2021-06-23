@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request
+from flask import render_template, request
 
 from models.topic import Topic
 from models.user import User
-from models.comment import Comment
 from models.settings import db
 
 

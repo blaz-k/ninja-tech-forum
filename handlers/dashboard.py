@@ -1,12 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response
-from hashlib import sha256
+from flask import render_template, request
 
-from models.topic import Topic
 from models.user import User
-from models.comment import Comment
 
 from models.settings import db
-from datetime import datetime
 
 
 def dashboard():

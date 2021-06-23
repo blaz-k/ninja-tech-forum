@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for
 
 from models.topic import Topic
 from models.user import User
@@ -52,16 +52,13 @@ def topic_details(topic_id):
 
         return render_template("topic.html", topic=topic, topics=topics, user=user)
 
-        #return render_template("topic.html", topic=topic, topics=topics)
-
     elif request.method == "POST":
         comment_content = request.form.get("content")
-        topics = db.query(Topic).all()
 
+        new_comment_content = Comment(content=comment_content, topic=topic, author=user)
+        new_comment_content.save()
 
-        new_comment_content = Comment(content=comment_content, topic=topics, author=user)
-
-        return redirect(url_for("dashboard.dashboard"))
+        return redirect(url_for("topic.topic_details", topic_id=topic_id))
 
 
 

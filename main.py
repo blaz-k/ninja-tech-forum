@@ -1,10 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response
-from hashlib import sha256
-import uuid
-
-from models.topic import Topic
-from models.user import User
-from models.comment import Comment
+from flask import Flask
 from models.settings import db
 
 from handlers import public
@@ -42,7 +36,6 @@ app.add_url_rule(rule="/dashboard/edit-profile", endpoint="user.edit_profile", v
 
 # DASHBOARD
 app.add_url_rule(rule="/dashboard", endpoint="dashboard.dashboard", view_func=dashboard.dashboard, methods=["GET", "POST"])
-
 
 
 if __name__ == '__main__':
