@@ -11,6 +11,7 @@ from handlers import public
 from handlers import auth
 from handlers import topic
 from handlers import user
+from handlers import dashboard
 
 
 app = Flask(__name__)
@@ -39,17 +40,8 @@ app.add_url_rule(rule="/topic/<topic_id>", endpoint="topic.topic_details", view_
 app.add_url_rule(rule="/dashboard/edit-profile", endpoint="user.edit_profile", view_func=user.edit_profile, methods=["GET", "POST"])
 
 
-@app.route("/dashboard", methods=["GET", "POST"])
-def dashboard():
-
-    session_cookie = request.cookies.get("session")
-
-    if session_cookie:
-        user = db.query(User).filter_by(session_token=session_cookie).first()
-        if user:
-            return render_template("dashboard.html", user=user)
-
-    return render_template("error.html")
+# DASHBOARD
+app.add_url_rule(rule="/dashboard", endpoint="dashboard.dashboard", view_func=dashboard.dashboard, methods=["GET", "POST"])
 
 
 if __name__ == '__main__':
