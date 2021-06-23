@@ -25,12 +25,12 @@ def login():
             existing_user.session_token = session_token
             existing_user.save()
 
-            response = make_response(redirect(url_for("dashboard")))
+            response = make_response(redirect(url_for("dashboard.dashboard")))
             response.set_cookie("session", session_token)
             return response
         else:
             return render_template("error-login.html")
-    return redirect(url_for("dashboard"))
+    return redirect(url_for("dashboard.dashboard"))
 
 
 def logout():

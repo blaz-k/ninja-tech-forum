@@ -56,8 +56,13 @@ def topic_details(topic_id):
 
     elif request.method == "POST":
         comment_content = request.form.get("content")
+        topics = db.query(Topic).all()
 
-       # new_comment_content = Comment(content=comment_content)
+
+        new_comment_content = Comment(content=comment_content, topic=topics, author=user)
+
+        return redirect(url_for("dashboard.dashboard"))
+
 
 
 

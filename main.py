@@ -44,5 +44,6 @@ app.add_url_rule(rule="/dashboard/edit-profile", endpoint="user.edit_profile", v
 app.add_url_rule(rule="/dashboard", endpoint="dashboard.dashboard", view_func=dashboard.dashboard, methods=["GET", "POST"])
 
 
+
 if __name__ == '__main__':
     app.run(use_reloader=True)
