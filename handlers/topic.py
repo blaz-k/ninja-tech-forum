@@ -52,6 +52,12 @@ def topic_details(topic_id):
 
         return render_template("topic.html", topic=topic, topics=topics, user=user)
 
-    return render_template("topic.html", topic=topic, topics=topics)
+        #return render_template("topic.html", topic=topic, topics=topics)
+
+    elif request.method == "POST":
+        comment_content = request.form.get("content")
+
+       # new_comment_content = Comment(content=comment_content)
+
 
 
