@@ -6,6 +6,7 @@ from handlers import auth
 from handlers import topic
 from handlers import user
 from handlers import dashboard
+from handlers import comment
 
 
 app = Flask(__name__)
@@ -36,6 +37,12 @@ app.add_url_rule(rule="/dashboard/edit-profile", endpoint="user.edit_profile", v
 
 # DASHBOARD
 app.add_url_rule(rule="/dashboard", endpoint="dashboard.dashboard", view_func=dashboard.dashboard, methods=["GET", "POST"])
+
+
+# COMMENT
+app.add_url_rule(rule="/topic/topic-create/<topic_id>/add-comment", endpoint="comment.user_comment", view_func=comment.user_comment, methods=["GET", "POST"])
+
+
 
 
 if __name__ == '__main__':

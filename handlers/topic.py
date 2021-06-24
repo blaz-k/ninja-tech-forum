@@ -51,7 +51,7 @@ def topic_details(topic_id):
             return render_template("not-found.html", user=user)
 
         return render_template("topic.html", topic=topic, topics=topics, user=user)
-
+"""
     elif request.method == "POST":
         comment_content = request.form.get("content")
 
@@ -59,7 +59,7 @@ def topic_details(topic_id):
         new_comment_content.save()
 
         return redirect(url_for("topic.topic_details", topic_id=topic_id))
-
+"""
 
 
 
