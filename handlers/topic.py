@@ -41,7 +41,7 @@ def topic_create():
 def topic_details(topic_id):
     topic = db.query(Topic).get(int(topic_id))
     session_cookie = request.cookies.get("session")
-    comments = db.query(Comment).all()
+    comments = db.query(Comment).filter_by(topic=topic).all()
 
     user = None
     if session_cookie:
