@@ -11,29 +11,46 @@
 <br>
 <br>
 <br>
-    <div class=" container mt-4 mb-2 ">
-        <div class="">
-          <h2 class="pb-4 mb-4 fst-italic border-bottom text-center">
-            Topics(tematika za urediti)
-          </h2>
-          <article class="blog-post">
-            <h1 class="blog-post-title"> Title: {{topic.title}}</h1>
-              <p style = "font-family:courier,arial,helvetica;" class="blog-post-meta">{{topic.created.strftime("%B")}} {{topic.created.day}}, {{topic.created.year}} by <strong>{{topic.author.username}}</strong></p>
-            <p>{{topic.description}}</p>
-          </article>
-            <hr>
-        </div>
-        <form action="/topic/{{topic.id}}/add-comment" method="post" >
+<div class=" container mt-4 mb-2 ">
+    <div class="">
+      <h2 class="pb-4 mb-4 fst-italic border-bottom text-center">
+        Topics(tematika za urediti)
+      </h2>
+      <article class="blog-post">
+        <h1 class="blog-post-title"> Title: {{topic.title}}</h1>
+          <p style = "font-family:courier,arial,helvetica;" class="blog-post-meta">{{topic.created.strftime("%B")}} {{topic.created.day}}, {{topic.created.year}} by <strong>{{topic.author.username}}</strong></p>
+        <p>{{topic.description}}</p>
+      </article>
+        <hr style="border-top: dotted 8px;">
+        <h4 class="text-center m-4">Comments</h4>
+        <hr style="border: 1px dashed black;">
+
+        {% for comment in comments %}
+        <p>
+            Username: {{comment.author.username}}
+        </p>
+        <p>
+            {{comment.content}}
+        </p>
+        <hr style="border: 1px dashed black;">
+        {% endfor %}
+        <br>
+        <br>
+        <br>
+        <hr class="mt-4" style="border-top: dotted 8px;">
+    </div>
+    <!--- COMMENT ON TOPIC -->
+    <form action="/topic/{{topic.id}}/add-comment" method="post" >
         <div>
-          <textarea name="content" rows="5" cols="80" placeholder="Enter your comment"></textarea>
+          <textarea name="content" rows="5" cols="50" placeholder="Enter your comment"></textarea>
           <br><br>
           <input type="submit">
         </div>
-        </form>
-    </div>
+    </form>
+    <!--- END COMMENT ON TOPIC -->
+</div>
 
 
 
-</form>
 
 {% endblock content %}
