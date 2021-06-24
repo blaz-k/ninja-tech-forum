@@ -15,12 +15,7 @@ def user_comment(topic_id):
     user = None
     if session_cookie:
         user = db.query(User).filter_by(session_token=session_cookie).first()
-    topics =db.query(Topic).all()
 
-    if request.method == "GET":
-        return render_template("/topic/topic-create.html")
-
-    elif request.method == "POST":
         comment_content = request.form.get("content")
 
         new_comment_content = Comment(content=comment_content, topic=topic, author=user)

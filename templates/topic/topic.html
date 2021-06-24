@@ -11,7 +11,6 @@
 <br>
 <br>
 <br>
-<form action="/topic/topic/{{topic.id}}" method="post" >
     <div class=" container mt-4 mb-2 ">
         <div class="">
           <h2 class="pb-4 mb-4 fst-italic border-bottom text-center">
@@ -24,11 +23,13 @@
           </article>
             <hr>
         </div>
+        <form action="/topic/{{topic.id}}/add-comment" method="post" >
         <div>
           <textarea name="content" rows="5" cols="80" placeholder="Enter your comment"></textarea>
           <br><br>
           <input type="submit">
         </div>
+        </form>
     </div>
 
 
