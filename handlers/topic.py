@@ -1,9 +1,11 @@
+import uuid
+
 from flask import render_template, request, redirect, url_for
 
 from models.topic import Topic
 from models.user import User
 from models.comment import Comment
-from models.settings import db
+from models.settings import db, redis
 
 
 def topics():
@@ -19,23 +21,31 @@ def topics():
 
 
 def topic_create():
+    session_token = request.cookies.get("session")
+    user = db.query(User).filter_by(session_token=session_token).first()
 
     if request.method == "GET":
-        return render_template("/topic/topic-create.html")
+        csrf_token = str(uuid.uuid4())
+        redis.set(name=csrf_token, value=user.username)
+
+        return render_template("/topic/topic-create.html", user=user, csrf_token=csrf_token)
 
     elif request.method == "POST":
-        title = request.form.get("title")
-        description = request.form.get("description")
+        csrf = request.form.get("csrf")
+        redis_csrf_username = redis.get(name=csrf).decode()
+        if redis_csrf_username and redis_csrf_username == user.username:
+            title = request.form.get("title")
+            description = request.form.get("content")
 
-        session_token = request.cookies.get("session")
-        user = db.query(User).filter_by(session_token=session_token).first()
+            topic = Topic.create(title=title, description=description, author=user)
 
-        if not user:
-            return redirect(url_for('/auth/login'))
+            return redirect(url_for("dashboard.dashboard"))
 
-        topic = Topic.create(title=title, description=description, author=user)
+    if not user:
+        return redirect(url_for("/auth/login"))
 
-        return redirect(url_for('dashboard.dashboard'))
+
+
 
 
 def topic_details(topic_id):
