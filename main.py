@@ -30,7 +30,7 @@ app.add_url_rule(rule="/topic/dashboard/topic-create", endpoint="topic.topic_cre
 app.add_url_rule(rule="/topic/topics", endpoint="topic.topics", view_func=topic.topics, methods=["GET"])
 app.add_url_rule(rule="/topic/topic/<topic_id>", endpoint="topic.topic_details", view_func=topic.topic_details, methods=["GET", "POST"])
 
-
+ 
 # USER
 app.add_url_rule(rule="/dashboard/edit-profile", endpoint="user.edit_profile", view_func=user.edit_profile, methods=["GET", "POST"])
 

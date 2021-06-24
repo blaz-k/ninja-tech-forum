@@ -5,15 +5,11 @@
 {% endif %}
 
 
-
 {% block link %}
     <link href="/static/css/dashboard-edit.css" rel="stylesheet">
 {% endblock link %}
 
-
 {% block profileactive %}active{% endblock profileactive %}
-
-
 
 {% block content %}
 <main id="main">
@@ -36,19 +32,18 @@
                         <p>Email: </p><input type="email" name="user-email" class="form-control" value="{{user.email}}" placeholder="Email">
                       </div>
                   </div>
-                      <div class="col-6 mt-4">
-                          <div class="form-floating mb-3">
-                            <p>Telephone:</p> <input type="tel" name="telephone" class="form-control" value="{{user.phone_number}}" placeholder="Telephone number">
-                          </div>
-                          <div class="form-floating mb-3">
-                            <p>Password:</p> <input type="password" name="password" class="form-control" placeholder="Password">
-                          </div>
-                          <div class="form-floating mb-3">
-                            <p>Repeat: </p><input type="password" name="repeat" class="form-control" placeholder="Password">
-                          </div>
+                  <div class="col-6 mt-4">
+                      <div class="form-floating mb-3">
+                        <p>Telephone:</p> <input type="tel" name="telephone" class="form-control" value="{{user.phone_number}}" placeholder="Telephone number">
                       </div>
+                      <div class="form-floating mb-3">
+                        <p>Password:</p> <input type="password" name="password" class="form-control" placeholder="Password">
+                      </div>
+                      <div class="form-floating mb-3">
+                        <p>Repeat: </p><input type="password" name="repeat" class="form-control" placeholder="Password">
+                      </div>
+                  </div>
               </div>
-
               <button class="alert alert-dark mt-4" type="submit">Submit</button>
           </main>
         </form>
