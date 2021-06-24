@@ -14,4 +14,4 @@ def dashboard():
         if user:
             return render_template("dashboard.html", user=user)
 
-    return render_template("error.html")
+    return render_template("/response/error.html")

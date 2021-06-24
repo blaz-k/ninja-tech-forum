@@ -13,10 +13,10 @@ def edit_profile():
         user = db.query(User).filter_by(session_token=session_cookie).first()
 
         if not user:
-            return render_template("error.html")
+            return render_template("/response/error.html")
 
     else:
-        return render_template("error.html")
+        return render_template("/response/error.html")
 
     if request.method == "GET":
         return render_template("edit-profile.html", user=user)

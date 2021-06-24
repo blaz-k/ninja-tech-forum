@@ -18,7 +18,7 @@ def user_comment(topic_id):
     topics =db.query(Topic).all()
 
     if request.method == "GET":
-        return render_template("topic-create.html")
+        return render_template("/topic/topic-create.html")
 
     elif request.method == "POST":
         comment_content = request.form.get("content")

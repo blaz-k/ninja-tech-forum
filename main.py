@@ -20,15 +20,15 @@ app.add_url_rule(rule="/contact", endpoint="public.contact", view_func=public.co
 
 
 # AUTHENTICATION
-app.add_url_rule(rule="/login", endpoint="auth.login", view_func=auth.login, methods=["GET", "POST"])
+app.add_url_rule(rule="/auth/login", endpoint="auth.login", view_func=auth.login, methods=["GET", "POST"])
 app.add_url_rule(rule="/logout", endpoint="auth.logout", view_func=auth.logout, methods=["GET"])
-app.add_url_rule(rule="/registration", endpoint="auth.registration", view_func=auth.registration, methods=["GET", "POST"])
+app.add_url_rule(rule="/auth/registration", endpoint="auth.registration", view_func=auth.registration, methods=["GET", "POST"])
 
 
 # TOPIC
-app.add_url_rule(rule="/dashboard/topic-create", endpoint="topic.topic_create", view_func=topic.topic_create, methods=["GET", "POST"])
-app.add_url_rule(rule="/topics", endpoint="topic.topics", view_func=topic.topics, methods=["GET"])
-app.add_url_rule(rule="/topic/<topic_id>", endpoint="topic.topic_details", view_func=topic.topic_details, methods=["GET", "POST"])
+app.add_url_rule(rule="/topic/dashboard/topic-create", endpoint="topic.topic_create", view_func=topic.topic_create, methods=["GET", "POST"])
+app.add_url_rule(rule="/topic/topics", endpoint="topic.topics", view_func=topic.topics, methods=["GET"])
+app.add_url_rule(rule="/topic/topic/<topic_id>", endpoint="topic.topic_details", view_func=topic.topic_details, methods=["GET", "POST"])
 
 
 # USER

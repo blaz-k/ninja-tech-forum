@@ -8,7 +8,7 @@ from models.settings import db
 
 def login():
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("/auth/login.html")
 
     elif request.method == "POST":
         username = request.form.get("username")
@@ -27,7 +27,7 @@ def login():
             response.set_cookie("session", session_token)
             return response
         else:
-            return render_template("error-login.html")
+            return render_template("/response/error-login.html")
     return redirect(url_for("dashboard.dashboard"))
 
 
@@ -65,7 +65,7 @@ def registration():
                                 phone_number=phone_number, password=password_hash)
                 new_user.save()
 
-                return render_template("successful.html")
+                return render_template("/response/successful.html")
             else:
                 return "ERROR: This username already exist! You need to choose something else."
 

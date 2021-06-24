@@ -1,0 +1,16 @@
+{% if user %}
+{% extends "user-base.html" %}
+{% else %}
+{% extends "base.html" %}
+{% endif %}
+
+
+{% block content %}
+  <main id="main">
+    <section id="contact">
+      <div class="container mt-5">
+        <h2>Not found!</h2>
+      </div>
+    </section>
+  </main>
+{% endblock content %}
