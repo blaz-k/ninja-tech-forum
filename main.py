@@ -44,4 +44,4 @@ app.add_url_rule(rule="/topic/<topic_id>/add-comment", endpoint="comment.user_co
 
 
 if __name__ == '__main__':
-    app.run(use_reloader=True)
+    app.run()
