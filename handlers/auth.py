@@ -42,7 +42,7 @@ def logout():
 
 def registration():
     if request.method == "GET":
-        return render_template("registration.html")
+        return render_template("/auth/registration.html")
 
     elif request.method == "POST":
         username = request.form.get("username")
