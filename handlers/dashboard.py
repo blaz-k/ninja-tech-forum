@@ -12,9 +12,8 @@ def dashboard():
     if session_cookie:
         user = db.query(User).filter_by(session_token=session_cookie).first()
         if user:
-            #topics = db.query(Topic).filter_by(username=user.username).all()
+            topics = db.query(Topic).filter_by(author=user).all()
 
-            #return render_template("dashboard.html", user=user, topics=topics)
-            return render_template("dashboard.html", user=user)
+            return render_template("dashboard.html", user=user, topics=topics)
 
     return render_template("/response/error.html")
