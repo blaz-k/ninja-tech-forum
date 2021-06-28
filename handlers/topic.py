@@ -45,9 +45,6 @@ def topic_create():
         return redirect(url_for("/auth/login"))
 
 
-
-
-
 def topic_details(topic_id):
     topic = db.query(Topic).get(int(topic_id))
     session_cookie = request.cookies.get("session")
