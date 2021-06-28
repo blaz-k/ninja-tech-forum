@@ -41,6 +41,7 @@ app.add_url_rule(rule="/dashboard", endpoint="dashboard.dashboard", view_func=da
 
 # COMMENT
 app.add_url_rule(rule="/topic/<topic_id>/add-comment", endpoint="comment.user_comment", view_func=comment.user_comment, methods=["POST"])
+app.add_url_rule(rule="/comment/<comment_id>/edit", endpoint="comment.edit_comment", view_func=comment.edit_comment, methods=["GET", "POST"])
 
 
 if __name__ == '__main__':

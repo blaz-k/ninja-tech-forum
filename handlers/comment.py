@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for
+from flask import request, redirect, url_for, render_template
 
 from models.topic import Topic
 from models.user import User
@@ -20,4 +20,34 @@ def user_comment(topic_id):
         new_comment_content.save()
 
         return redirect(url_for("topic.topic_details", topic_id=topic_id))
+
+
+def edit_comment(comment_id):
+    session_cookie = request.cookies.get("session")
+    user = db.query(User).filter_by(session_token=session_cookie).first()
+
+    if not user:
+        return render_template("response/error.html")
+
+    comment = db.query(Comment).filter_by(id=int(comment_id)).first()
+
+    if comment.author != user:
+        return "ERROR: You are not comment author!!"
+
+    if request.method == "GET":
+        return render_template("/comment/edit.html", comment=comment)
+
+    elif request.method == "POST":
+
+        content = request.form.get("content")
+
+        comment.content = content
+        comment.save()
+
+        return redirect(url_for("topic.topic_details", topic_id=comment.topic_id))
+
+
+
+
+
 
