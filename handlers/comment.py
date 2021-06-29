@@ -1,9 +1,11 @@
+import uuid
+
 from flask import request, redirect, url_for, render_template
 
 from models.topic import Topic
 from models.user import User
 from models.comment import Comment
-from models.settings import db
+from models.settings import db, redis
 
 
 def user_comment(topic_id):
@@ -35,14 +37,20 @@ def edit_comment(comment_id):
         return "ERROR: You are not comment author!!"
 
     if request.method == "GET":
-        return render_template("/comment/edit.html", comment=comment)
+        csrf_token = str(uuid.uuid4())
+        redis.set(name=csrf_token, value=user.username)
+        return render_template("/comment/edit.html", comment=comment, csrf_token=csrf_token)
 
     elif request.method == "POST":
 
         content = request.form.get("content")
+        csrf = request.form.get("csrf")
 
-        comment.content = content
-        comment.save()
+        existing_csrf = redis.get(csrf).decode()
+
+        if existing_csrf and existing_csrf == user.username:
+            comment.content = content
+            comment.save()
 
         return redirect(url_for("topic.topic_details", topic_id=comment.topic_id))
 
