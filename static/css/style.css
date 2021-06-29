@@ -1134,3 +1134,8 @@ section {
   font-size: 13px;
   color: #ccc;
 }
+
+
+.edit-comment {
+    margin-right: 3em;
+}

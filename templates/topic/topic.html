@@ -33,7 +33,8 @@
             {{comment.content}}
         </p>
         <p>
-            <a href="/comment/{{comment.id}}/edit">edit comment</a>
+            <a href="/comment/{{comment.id}}/edit" class="edit-comment">Edit comment</a>
+            <a href="/comment/{{comment.id}}/delete">Delete comment</a>
         </p>
         <hr style="border: 1px dashed black;">
         {% endfor %}
