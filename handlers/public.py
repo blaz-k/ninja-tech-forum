@@ -45,7 +45,7 @@ def contact():
         """.format(name, sender_email, message)
 
         email = Mail(from_email="blazyy@gmail.com",
-                       to_emails=sender_email,
+                       to_emails="blazyy@gmail.com",
                        subject=subject,
                        html_content=body)
 
