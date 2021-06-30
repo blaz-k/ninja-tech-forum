@@ -2,7 +2,6 @@ from models.settings import db
 from datetime import datetime
 
 
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)

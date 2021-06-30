@@ -35,7 +35,7 @@ app.add_url_rule(rule="/dashboard/edit-profile", endpoint="user.edit_profile", v
 
 # PUBLIC
 app.add_url_rule(rule="/", endpoint="public.home", view_func=public.home, methods=["GET"])
-app.add_url_rule(rule="/contact", endpoint="public.contact", view_func=public.contact, methods=["GET"])
+app.add_url_rule(rule="/contact", endpoint="public.contact", view_func=public.contact, methods=["GET", "POST"])
 
 
 # TOPIC

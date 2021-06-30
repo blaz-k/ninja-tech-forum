@@ -4,3 +4,4 @@ sqla-wrapper
 pytest~=6.2.4
 smartninja_redis
 psycopg2
+sendgrid
