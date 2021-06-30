@@ -45,9 +45,10 @@ def contact():
         """.format(name, sender_email, message)
 
         email = Mail(from_email="blazyy@gmail.com",
-                       to_emails="blazyy@gmail.com",
-                       subject=subject,
-                       html_content=body)
+                     to_emails="blazyy@gmail.com",
+                     subject=subject,
+                     html_content=body)
+        email.reply_to = sender_email
 
         # DELETE API KEY BEFORE UPLOADING TO GITHUB!!!!!!!
         sg_key = os.environ.get("SENDGRID_API_KEY")
