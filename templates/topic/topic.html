@@ -30,8 +30,13 @@
           <div class="card-body">
             <h5 class="card-title"><strong>{{comment.author.username}}</strong></h5>
             <p class="card-text">{{comment.content}}</p>
-            <a href="/comment/{{comment.id}}/edit" class="btn alert alert-success edit-comment">Edit comment</a>
-            <a href="/comment/{{comment.id}}/delete" class="btn alert alert-success edit-comment">Delete comment</a>
+            <div class="blockquote-footer text-muted m-auto">
+                    {{comment.created.strftime("%d-%m-%Y at %I:%M %p")}}
+            </div>
+            <div class="mt-4">
+                <a href="/comment/{{comment.id}}/edit" class="btn alert alert-success edit-comment">Edit comment</a>
+                <a href="/comment/{{comment.id}}/delete" class="btn alert alert-success edit-comment">Delete comment</a>
+            </div>
           </div>
         </div>
         <hr style="border: 1px dashed black;">
