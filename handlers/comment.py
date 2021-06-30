@@ -34,7 +34,7 @@ def edit_comment(comment_id):
     comment = db.query(Comment).filter_by(id=int(comment_id)).first()
 
     if comment.author != user:
-        return "ERROR: You are not comment author!!"
+        return render_template("/response/error-comment.html")
 
     if request.method == "GET":
         csrf_token = str(uuid.uuid4())
@@ -64,7 +64,7 @@ def delete_comment(comment_id):
     comment = db.query(Comment).filter_by(id=int(comment_id)).first()
 
     if comment.author != user:
-        return "ERROR: You are not comment author!!"
+        return render_template("/response/error-comment.html")
 
     if request.method == "GET":
         csrf_token = str(uuid.uuid4())
