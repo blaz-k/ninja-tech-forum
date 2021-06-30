@@ -67,14 +67,20 @@ def delete_comment(comment_id):
         return "ERROR: You are not comment author!!"
 
     if request.method == "GET":
-        return render_template("comment/delete.html", comment=comment)
+        csrf_token = str(uuid.uuid4())
+        redis.set(name=csrf_token, value=user.username)
+        return render_template("comment/delete.html", comment=comment, csrf_token=csrf_token)
 
     elif request.method == "POST":
 
         content = request.form.get("content")
+        csrf = request.form.get("csrf")
 
-        comment.content = content
-        comment.delete()
+        existing_csrf = redis.get(csrf).decode()
+
+        if existing_csrf and existing_csrf == user.username:
+            comment.content = content
+            comment.delete()
 
         return redirect(url_for("topic.topic_details", topic_id=comment.topic_id))
 

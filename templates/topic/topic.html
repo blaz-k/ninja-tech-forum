@@ -25,22 +25,17 @@
         <h4 class="text-center m-4">Comments</h4>
         <hr style="border: 1px dashed black;">
 
-        {% for comment in comments %}
-        <p>
-            Username: {{comment.author.username}}
-        </p>
-        <p>
-            {{comment.content}}
-        </p>
-        <p>
-            <a href="/comment/{{comment.id}}/edit" class="edit-comment">Edit comment</a>
-            <a href="/comment/{{comment.id}}/delete">Delete comment</a>
-        </p>
+{% for comment in comments %}
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{comment.author.username}}</h5>
+            <p class="card-text">{{comment.content}}</p>
+            <a href="/comment/{{comment.id}}/edit" class="btn alert alert-success edit-comment">Edit comment</a>
+            <a href="/comment/{{comment.id}}/delete" class="btn alert alert-success edit-comment">Delete comment</a>
+          </div>
+        </div>
         <hr style="border: 1px dashed black;">
-        {% endfor %}
-        <br>
-        <br>
-        <br>
+{% endfor %}
         <hr class="mt-4" style="border-top: dotted 8px;">
     </div>
     <!--- COMMENT ON TOPIC -->
