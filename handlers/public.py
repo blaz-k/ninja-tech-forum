@@ -34,14 +34,20 @@ def contact():
     elif request.method == "POST":
 
         name = request.form.get("name")
-        recipient = request.form.get("email")
+        sender_email = request.form.get("email")
         subject = request.form.get("subject")
         message = request.form.get("message")
 
+        body = """
+            name: {0}, 
+            sender_email: {1},
+            message: {2}.
+        """.format(name, sender_email, message)
+
         email = Mail(from_email="blazyy@gmail.com",
-                       to_emails=recipient,
+                       to_emails=sender_email,
                        subject=subject,
-                       html_content=message)
+                       html_content=body)
 
         # DELETE API KEY BEFORE UPLOADING TO GITHUB!!!!!!!
         sg_key = os.environ.get("SENDGRID_API_KEY")
