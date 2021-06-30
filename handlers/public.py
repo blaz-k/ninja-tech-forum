@@ -39,8 +39,8 @@ def contact():
         message = request.form.get("message")
 
         body = """
-            name: {0}, 
-            sender_email: {1},
+            name: {0},<br> 
+            sender_email: {1},<br><br>
             message: {2}.
         """.format(name, sender_email, message)
 
