@@ -1,3 +1,9 @@
+.topic {
+  width: 100%;
+  max-width: 630px;
+  padding: 20px;
+  margin: auto;
+}
 
 
 .form-registration {
@@ -12,4 +18,3 @@ p {
     color:;
     font-weight: 900;
 }
-
