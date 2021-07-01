@@ -13,3 +13,5 @@ class User(db.Model):
     session_token = db.Column(db.String, unique=False)
     created = db.Column(db.DateTime, default=datetime.now())
     updated = db.Column(db.DateTime, onupdate=datetime.now())
+    verified = db.Column(db.Boolean, default=False)
+    verification_token = db.Column(db.String)
