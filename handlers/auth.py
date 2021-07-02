@@ -67,6 +67,6 @@ def registration():
 
                 return render_template("/response/successful.html")
             else:
-                return "ERROR: This username already exist! You need to choose something else."
+                return "ERROR: Passwords do not match!"
 
     return redirect(url_for("public.home"))
