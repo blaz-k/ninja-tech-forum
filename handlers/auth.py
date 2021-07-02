@@ -1,6 +1,10 @@
+import os
+import logging
 from flask import render_template, request, redirect, url_for, make_response
 from hashlib import sha256
 import uuid
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 from models.user import User
 from models.settings import db
@@ -16,7 +20,7 @@ def login():
 
         password_hash = sha256(password.encode("utf-8")).hexdigest()
 
-        existing_user = db.query(User).filter_by(username=username, password=password_hash).first()
+        existing_user = db.query(User).filter_by(username=username, password=password_hash, verified=True).first()
 
         if existing_user:
             session_token = str(uuid.uuid4())
@@ -60,13 +64,52 @@ def registration():
         else:
             if password == repeat:
                 password_hash = sha256(password.encode("utf-8")).hexdigest()
+                verify_email_token = str(uuid.uuid4())
+
                 new_user = User(username=username, first_name=first_name, last_name=last_name,
-                                email=email,
-                                phone_number=phone_number, password=password_hash)
+                                email=email, phone_number=phone_number, password=password_hash,
+                                verification_token=verify_email_token)
                 new_user.save()
+
+                verification_url = "https://ninja-forum.herokuapp.com/verify-token/" + verify_email_token
+
+                body = """
+                    Verify your email for NINJA TECH FORUM: {}.
+                """.format(verification_url)
+
+                verification_message = Mail(from_email="blazyy@gmail.com",
+                                            to_emails=email,
+                                            subject="Verification of your email on NINJA TECH FORUM",
+                                            html_content=body)
+
+                sg_key = os.environ.get("SENDGRID_API_KEY")
+
+                sg = SendGridAPIClient(sg_key)
+                response = sg.send(verification_message)
+
+                # checking loggings
+
+                logging.warning(response.status_code)
+                logging.warning(response.body)
+                logging.warning(response.headers)
 
                 return render_template("/response/successful.html")
             else:
                 return "ERROR: Passwords do not match!"
 
     return redirect(url_for("public.home"))
+
+
+def verify_token(token):
+    user = db.query(User).filter_by(verification_token=token).first()
+
+    if user:
+        user.verified = True
+        user.save()
+
+    return redirect(url_for("auth.login"))
+
+
+
+
+
