@@ -95,7 +95,7 @@ def registration():
 
                 return render_template("/response/successful.html")
             else:
-                return "ERROR: Passwords do not match!"
+                return render_template("/response/passwords-not-match.html")
 
     return redirect(url_for("public.home"))
 
