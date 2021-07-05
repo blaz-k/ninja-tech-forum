@@ -8,6 +8,7 @@ from flask import render_template, request, redirect, url_for
 from models.topic import Topic
 from models.user import User
 from models.settings import db
+from utils import send_email
 
 
 def home():
@@ -38,29 +39,7 @@ def contact():
         subject = request.form.get("subject")
         message = request.form.get("message")
 
-        body = """
-            name: {0},<br> 
-            sender_email: {1},<br><br>
-            message: {2}.
-        """.format(name, sender_email, message)
-
-        email = Mail(from_email="blazyy@gmail.com",
-                     to_emails="blazyy@gmail.com",
-                     subject=subject,
-                     html_content=body)
-        email.reply_to = sender_email
-
-        # DELETE API KEY BEFORE UPLOADING TO GITHUB!!!!!!!
-        sg_key = os.environ.get("SENDGRID_API_KEY")
-
-        sg = SendGridAPIClient(sg_key)
-        response = sg.send(email)
-
-        # checking loggings
-
-        logging.warning(response.status_code)
-        logging.warning(response.body)
-        logging.warning(response.headers)
+        send_email(recipient=sender_email, subject=subject, body=message)
 
         return redirect(url_for("public.contact"))
 
