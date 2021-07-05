@@ -7,7 +7,7 @@ from sendgrid.helpers.mail import Mail
 huey = RedisHuey(url=os.getenv('REDIS_URL'))
 
 
-@huey.task(retries=10, retry_delay=10)
+@huey.task(retries=3, retry_delay=3)
 def send_email_task(recipient, subject, body, reply_to=None):
     message = Mail(from_email="blazyy@gmail.com",
                    to_emails=recipient,
