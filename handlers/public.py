@@ -39,8 +39,8 @@ def contact():
         subject = request.form.get("subject")
         message = request.form.get("message")
 
-        send_email(recipient=sender_email, subject=subject, body=message)
+        send_email(recipient="blazyy@gmail.com", subject=subject, body=message)
 
-        return redirect(url_for("public.contact"))
+        return render_template("/response/successful-message.html")
 
 
