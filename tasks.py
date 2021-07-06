@@ -26,5 +26,5 @@ def send_email_task(recipient, subject, body, reply_to=None):
     logging.warning(response.body)
     logging.warning(response.headers)
 
-    if int(response.status_code) != int(200) or int(response.status_code) != int(202):
+    if response.status_code != int(200) or response.status_code != int(202):
         raise Exception("Error sending via SendGrid")
