@@ -19,24 +19,26 @@ def home():
 
 
 def contact():
-    if request.method == "GET":
-        session_cookie = request.cookies.get("session")
+    session_cookie = request.cookies.get("session")
 
-        if session_cookie:
-            user = db.query(User).filter_by(session_token=session_cookie).first()
-            if user:
-                return render_template("contact.html", user=user)
-        return render_template("contact.html")
+    if session_cookie:
+        user = db.query(User).filter_by(session_token=session_cookie).first()
+        if user:
+            return render_template("contact.html", user=user)
 
-    elif request.method == "POST":
+        if request.method == "GET":
 
-        name = request.form.get("name")
-        sender_email = request.form.get("email")
-        subject = request.form.get("subject")
-        message = request.form.get("message")
+            return render_template("contact.html")
 
-        send_email(recipient="blazyy@gmail.com", subject=subject, user_name=name, body=message)
+        elif request.method == "POST":
 
-        return render_template("/response/successful-message.html")
+            name = request.form.get("name")
+            sender_email = request.form.get("email")
+            subject = request.form.get("subject")
+            message = request.form.get("message")
+
+            send_email(recipient="blazyy@gmail.com", subject=subject, user_name=name, body=message)
+
+            return render_template("/response/successful-message.html", user=user)
 
 
