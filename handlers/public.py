@@ -28,7 +28,7 @@ def contact():
 
         if request.method == "GET":
 
-            return render_template("contact.html")
+            return render_template("contact.html", user=user)
 
         elif request.method == "POST":
 
@@ -39,6 +39,6 @@ def contact():
 
             send_email(recipient="blazyy@gmail.com", subject=subject, user_name=name, body=message)
 
-            return render_template("/response/successful-message.html", user=user)
+        return render_template("/response/successful-message.html", user=user)
 
 
