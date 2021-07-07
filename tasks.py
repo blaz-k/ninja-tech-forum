@@ -8,17 +8,11 @@ huey = RedisHuey(url=os.getenv('REDIS_URL'))
 
 
 @huey.task(retries=3, retry_delay=3)
-def send_email_task(recipient, subject, user_name, body, reply_to=None):
-    body = """
-                   Name: {0}
-                   <br>
-                   <br>
-                   Message: {1}
-               """.format(user_name, body)
+def send_email_task(recipient, subject, body, reply_to=None):
+
     message = Mail(from_email="blazyy@gmail.com",
                    to_emails=recipient,
                    subject=subject,
-                   plain_text_content=user_name,
                    html_content=body)
     if reply_to:
         message.reply_to = reply_to

@@ -1,10 +1,9 @@
 import os
-import logging
 from flask import render_template, request, redirect, url_for, make_response
 from hashlib import sha256
 import uuid
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+from utils import send_email, is_localhost
+
 
 from models.user import User
 from models.settings import db
@@ -71,27 +70,16 @@ def registration():
                                 verification_token=verify_email_token)
                 new_user.save()
 
-                verification_url = "https://ninja-forum.herokuapp.com/verify-token/" + verify_email_token
+                verification_url = "http://127.0.0.1:5000/verify-token/" + verify_email_token
+
+                if not is_localhost():
+                    verification_url = "https://ninja-forum.herokuapp.com/verify-token/" + verify_email_token
 
                 body = """
                     Verify your email for NINJA TECH FORUM: {}.
                 """.format(verification_url)
 
-                verification_message = Mail(from_email="blazyy@gmail.com",
-                                            to_emails=email,
-                                            subject="Verification of your email on NINJA TECH FORUM",
-                                            html_content=body)
-
-                sg_key = os.environ.get("SENDGRID_API_KEY")
-
-                sg = SendGridAPIClient(sg_key)
-                response = sg.send(verification_message)
-
-                # checking loggings
-
-                logging.warning(response.status_code)
-                logging.warning(response.body)
-                logging.warning(response.headers)
+                send_email(recipient=email, subject="VERIFICATION FOR NINJA-TECH-FORUM", body=body)
 
                 return render_template("/response/successful.html")
             else:
