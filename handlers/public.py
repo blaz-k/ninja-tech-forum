@@ -1,9 +1,5 @@
-import logging
-import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request
 
 from models.topic import Topic
 from models.user import User
@@ -39,7 +35,7 @@ def contact():
         subject = request.form.get("subject")
         message = request.form.get("message")
 
-        send_email(recipient="blazyy@gmail.com", subject=subject, user_name=name, body=message)
+        send_email(recipient="blazyy@gmail.com", subject=subject, user_name=name, body=message, reply_to=sender_email)
 
         return render_template("/response/successful-message.html")
 

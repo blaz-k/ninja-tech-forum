@@ -19,7 +19,8 @@ def send_email_task(recipient, subject, user_name, body, reply_to=None):
                    to_emails=recipient,
                    subject=subject,
                    plain_text_content=user_name,
-                   html_content=body)
+                   html_content=body,
+                   reply_to=reply_to)
     if reply_to:
         message.reply_to = reply_to
 
