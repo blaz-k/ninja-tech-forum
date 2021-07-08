@@ -8,10 +8,9 @@ from utils import send_email
 
 def new_topics_email():
     today = datetime.datetime.now()
-    monday = datetime.date.isoweekday(today)
-    print(today)
-    print(monday)
-    if today == 1:
+    weekday_number = datetime.date.isoweekday(today)
+
+    if weekday_number == 1:
         yesterday_topics = db.query(Topic).filter(Topic.created > (datetime.datetime.now() - datetime.timedelta(days=1))).all()
 
         if not yesterday_topics:
