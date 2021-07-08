@@ -8,12 +8,12 @@ from utils import send_email
 
 def new_topics_email():
     today = datetime.datetime.now()
-    monday = datetime.date.isoweekday(today) == 1
-
-    if today == monday:
+    monday = datetime.date.isoweekday(today)
+    print(today)
+    print(monday)
+    if today == 1:
         yesterday_topics = db.query(Topic).filter(Topic.created > (datetime.datetime.now() - datetime.timedelta(days=1))).all()
 
-        # if no topics, finish the task without sending the email
         if not yesterday_topics:
             print("No new topics yesterday")
         else:
