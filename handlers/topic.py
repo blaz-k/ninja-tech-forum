@@ -65,14 +65,10 @@ def topic_details(topic_id):
 
 def subscribe(topic_id):
     topic = db.query(Topic).get(int(topic_id))
+    session_cookie = request.cookies.get("session")
+    user = db.query(User).filter_by(session_token=session_cookie).first()
 
-    if request.method == "GET":
-        session_cookie = request.cookies.get("session")
+    subscription = Subscribe(topic=topic, user=user)
+    subscription.save()
 
-        if session_cookie:
-            user = db.query(User).filter_by(session_token=session_cookie).first()
-            subscribes = db.query(Subscribe).all()
-
-            if user:
-                return render_template("/topic/subscribe.html", topic=topic, user=user, subscribes=subscribes)
-        return render_template("/topic/topics.html")
+    return redirect(url_for("topic.topic_details", topic_id=topic_id))

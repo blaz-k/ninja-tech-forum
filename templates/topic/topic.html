@@ -21,9 +21,9 @@
           <p style = "font-family:courier,arial,helvetica;" class="blog-post-meta">{{topic.created.strftime("%B")}} {{topic.created.day}}, {{topic.created.year}} by <strong>{{topic.author.username}}</strong></p>
         <p>{{topic.description}}</p>
       </article>
-       <form method="post">
+       <form method="post" action="/topic/{{topic.id}}/subscribe">
          <div class="mt-4">
-             <a href="/topic/{{topic.id}}/subscribe" class="btn btn-outline-info edit-comment">Subscribe</a>
+             <button type="submit" class="btn btn-outline-info edit-comment">Subscribe</button>
          </div>
        </form>
         <hr style="border-top: dotted 8px;">
