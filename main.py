@@ -43,6 +43,7 @@ app.add_url_rule(rule="/contact", endpoint="public.contact", view_func=public.co
 app.add_url_rule(rule="/dashboard/topic-create", endpoint="topic.topic_create", view_func=topic.topic_create, methods=["GET", "POST"])
 app.add_url_rule(rule="/topics", endpoint="topic.topics", view_func=topic.topics, methods=["GET"])
 app.add_url_rule(rule="/topic/<topic_id>", endpoint="topic.topic_details", view_func=topic.topic_details, methods=["GET", "POST"])
+app.add_url_rule(rule="/topic/<topic_id>/subscribe", endpoint="topic.subscribe", view_func=topic.subscribe, methods=["GET", "POST"])
 
 
 if __name__ == '__main__':

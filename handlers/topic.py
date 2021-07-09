@@ -63,4 +63,16 @@ def topic_details(topic_id):
     return render_template("topic/topic.html", topic=topic, topics=topics, user=user, comments=comments)
 
 
+def subscribe(topic_id):
+    topic = db.query(Topic).get(int(topic_id))
 
+    if request.method == "GET":
+        session_cookie = request.cookies.get("session")
+
+        if session_cookie:
+            user = db.query(User).filter_by(session_token=session_cookie).first()
+            subscribes = db.query(Subscribe).all()
+
+            if user:
+                return render_template("/topic/subscribe.html", topic=topic, user=user, subscribes=subscribes)
+        return render_template("/topic/topics.html")
