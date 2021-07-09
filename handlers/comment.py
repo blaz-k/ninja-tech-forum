@@ -2,13 +2,15 @@ import uuid
 
 from flask import request, redirect, url_for, render_template
 
+from models.subscribe import Subscribe
 from models.topic import Topic
 from models.user import User
 from models.comment import Comment
 from models.settings import db, redis
+from utils import send_email, is_localhost
 
 
-def user_comment(topic_id):
+def create_comment(topic_id):
     topic = db.query(Topic).get(int(topic_id))
     session_cookie = request.cookies.get("session")
 
@@ -20,6 +22,25 @@ def user_comment(topic_id):
 
         new_comment_content = Comment(content=comment_content, topic=topic, author=user)
         new_comment_content.save()
+
+        subscriptions = db.query(Subscribe).filter_by(topic=topic).all()
+
+        for item in subscriptions:
+            subscriber = db.query(User).filter_by(id=item.user_id).first()
+
+            topic_url = "http://127.0.0.1:5000/topic/{}".format(topic.id)
+
+            if not is_localhost():
+                topic_url = "https://ninja-forum.herokuapp.com/topic/{}".format(topic.id)
+
+            body = """
+                There is a new comment in topic {0}\n
+                Link for this topic: {1}\n
+                Comment: {2}
+            """.format(topic.title, topic_url, comment_content)
+            send_email(recipient=subscriber.email,
+                       subject="new comment in topic: "+topic.title,
+                       body=body)
 
         return redirect(url_for("topic.topic_details", topic_id=topic_id))
 
