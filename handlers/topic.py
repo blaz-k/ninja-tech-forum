@@ -5,18 +5,20 @@ from flask import render_template, request, redirect, url_for
 from models.topic import Topic
 from models.user import User
 from models.comment import Comment
+from models.subscribe import Subscribe
 from models.settings import db, redis
 
 
 def topics():
     if request.method == "GET":
         topics = db.query(Topic).all()
+        subscribes = db.query(Subscribe).all()
         session_cookie = request.cookies.get("session")
 
         if session_cookie:
             user = db.query(User).filter_by(session_token=session_cookie).first()
             if user:
-                return render_template("/topic/topics.html", topics=topics, user=user)
+                return render_template("/topic/topics.html", topics=topics, user=user, subscribes=subscribes)
         return render_template("/topic/topics.html", topics=topics)
 
 

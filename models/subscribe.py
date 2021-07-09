@@ -9,4 +9,3 @@ class Subscribe(db.Model):
     topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
     topic = db.relationship("Topic")
     date = db.Column(db.DateTime, default=datetime.now())
-g
