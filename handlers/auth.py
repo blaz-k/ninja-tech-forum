@@ -1,4 +1,3 @@
-import os
 from flask import render_template, request, redirect, url_for, make_response
 from hashlib import sha256
 import uuid
