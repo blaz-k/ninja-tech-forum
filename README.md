@@ -1,3 +1,15 @@
-# ninja-tech-forum
+# Ninja-tech-forum
 
-!|(static/img/ninja_tech.png)
+Forum where you can register and than start a topic, comment or reply to one. It also notices you if there is a new comment on selected topic.
+
+Link to website: [https://ninja-forum.herokuapp.com/](https://ninja-forum.herokuapp.com/)
+
+Tech that I used:
+
+- Python
+- SQL
+- Redis
+- Sendgrid
+- Bootstrap
+
+![](static/img/ninja-tech-photo.png)
