@@ -12,4 +12,4 @@ Tech that I used:
 - Sendgrid
 - Bootstrap
 
-![](static/img/ninja-tech-photo.png)
+![](static/img/Ninja-tech-forum.png)
