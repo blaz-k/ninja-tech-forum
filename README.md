@@ -11,5 +11,6 @@ Tech that I used:
 - Redis
 - Sendgrid
 - Bootstrap
+- Cron job
 
 ![](static/img/Ninja-tech-forum.png)
